@@ -1,0 +1,12 @@
+mysql:
+  container_name: mysite_mysql
+  restart: always
+  image: vsamov/mysql-5.1.73
+  environment:
+    MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+    MYSQL_USER: 'webdb'
+    MYSQL_PASS: 'webdb'
+  volumes:
+    - ./docker/mysql_data:/var/lib/mysql
+  ports:
+    - "3306:3306"

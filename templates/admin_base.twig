@@ -1,0 +1,9 @@
+{% extends 'base.twig' %}
+{% block header %}
+    <a href="/index.php?action=admin">admin</a>
+    <a href="/index.php?action=admin2">admin2</a>
+    <a href="/index.php?action=admin3">admin3</a>
+    <form method="post" action="/index.php?action=logout">
+        <button type="submit">Logout</button>
+    </form>
+{% endblock %}

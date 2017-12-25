@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+{% block title %}Join{% endblock %}
+{% block content %}
+    <form method="post" action ="/join.php">
+        <h3>회원가입</h3>
+        <div>
+            <input type="text" name="email" placeholder="email" />
+        </div>
+        <div>
+            <input type="password" name="password" placeholder = "password"/>
+        </div>
+        <div>
+            <button type="submit">가입하기</button>
+        </div>
+    </form>
+{% endblock %}
