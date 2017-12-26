@@ -1,21 +1,23 @@
 <?php 
 session_start();
-$action = $_GET['action'];
-ob_start();
-$isGetReq = $_SERVER['REQUEST_METHOD'] === 'GET';
 
 include_once './vendor/autoload.php';
 
-$templatesPath = './templates/';
-$loader = new Twig_Loader_Filesystem($templatesPath);
-$twig = new Twig_Environment($loader, array(
-    'debug' => true,
-));
+//$Bootstrap = require_once 'bootstrap.php';
+//new $Bootstrap();
+require_once  './base.php';
+Base::bootstrap();
 
-$actionFile =  $action . '.php';
-if(file_exists($actionFile)){
-    $k = require_once($actionFile);
-    new $k();
-} else {
-    echo $twig->render('404.twig');
-}
+
+/*
+1. 로그인
+2. 회원가입
+3. 어드민
+4. 템플릿
+5. ioc 상속
+6. class 심화 - acl
+7. trait - composition
+8. namespace 구조 - 폴더와 namespace 맞추기
+9. psr - composer를 이용한
+
+*/

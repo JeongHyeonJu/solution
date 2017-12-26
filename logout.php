@@ -1,3 +1,20 @@
 <?php
-session_destroy();
-header('Location: /index.php?action=login');
+
+$base = require_once('base.php');
+
+class Logout extends Base
+{
+    public function get()
+    {
+        return [];
+    }
+
+    public function post()
+    {
+        session_destroy();
+        return 'index.php?action=login';
+
+    }
+}
+
+return Logout;

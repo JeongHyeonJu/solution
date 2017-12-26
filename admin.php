@@ -1,15 +1,22 @@
 <?php
-if(empty($_SESSION['email'])){
-    header('Location: /index.php?action=login');
-    exit();
-}
+$base = require_once('base.php');
 
-if($isGetReq){
+class Admin extends Base
+{
 
-    $twigFile = $action . '.twig';
-    if(file_exists($templatesPath. $twigFile)){
-        echo $twig->render($twigFile, $_GET);
+    public function get()
+    {
+        if (!$_SESSION['email']) {
+            return 'index.php?action=login';
+        }
+        return [];
+
     }
 
-}else {
+    public function post()
+    {
+        return '';
+    }
 }
+
+return Admin;
