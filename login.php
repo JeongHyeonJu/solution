@@ -1,21 +1,19 @@
 <?php
 $base = require_once('base.php');
+$auth = require_once('auth.php');
 
 class Login extends Base
 {
 
     public function get()
     {
-        if ($_SESSION['email']) {
-            return 'index.php?action=admin';
-        }
-
-        return ['moduleName' => 'login',];
+        $check = (new auth())->check();
+        return !empty($check) ? $check : ['moduleName' => 'login'];
     }
 
     public function post()
     {
-        $email = $_POST['email'];
+        $email    = $_POST['email'];
         $password = $_POST['password'];
 
         if (empty($email) || empty($password)) {
@@ -23,7 +21,7 @@ class Login extends Base
         }
 
         $connection = new \PDO('mysql:host=localhost:3306;dbname=solution;charset=utf8', 'solution', 'qwer1234');
-        $statement = $connection->prepare('SELECT email, password FROM users WHERE email = :email ');
+        $statement  = $connection->prepare('SELECT email, password FROM users WHERE email = :email ');
         $statement->execute([
             'email' => $email,
         ]);

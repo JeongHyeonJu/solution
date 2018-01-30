@@ -1,16 +1,14 @@
 <?php
-$base = require_once('base.php');
+$base      = require_once('base.php');
+$adminAuth = require_once('admin_auth.php');
 
 class Admin extends Base
 {
 
     public function get()
     {
-        if (!$_SESSION['email']) {
-            return 'index.php?action=login';
-        }
-        return [];
-
+        $check = (new AdminAuth)->check();
+        return !empty($check) ? $check : [];
     }
 
     public function post()

@@ -1,15 +1,20 @@
 <?php
-if(empty($_SESSION['email'])){
-    header('Location: /index.php?action=login');
-    exit();
-}
+$base      = require_once('base.php');
+$adminAuth = require_once('admin_auth.php');
 
-if($isGetReq){
+class Admin3 extends Base
+{
 
-    $twigFile = $action . '.twig';
-    if(file_exists($templatesPath. $twigFile)){
-        echo $twig->render($twigFile, $_GET);
+    public function get()
+    {
+        $check = (new AdminAuth)->check();
+        return !empty($check) ? $check : [];
     }
 
-}else {
+    public function post()
+    {
+        return '';
+    }
 }
+
+return Admin3;

@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 
 include_once './vendor/autoload.php';
 
 //$Bootstrap = require_once 'bootstrap.php';
 //new $Bootstrap();
-require_once  './base.php';
+require_once './base.php';
 Base::bootstrap();
 
 
