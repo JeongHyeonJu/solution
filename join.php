@@ -1,14 +1,12 @@
 <?php
-$base = require_once('base.php');
-$auth = require_once('auth.php');
+require_once('auth.php');
 
-class Join extends Base
+class Join extends Auth
 {
 
     public function get()
     {
-        $check = (new auth())->check();
-        return !empty($check) ? $check : ['actionName' => 'join'];
+        return ['actionName' => 'join'];
     }
 
     public function post()

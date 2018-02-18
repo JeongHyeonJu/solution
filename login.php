@@ -1,17 +1,15 @@
 <?php
-$base = require_once('base.php');
-$auth = require_once('auth.php');
+require_once('auth.php');
 
-class Login extends Base
+
+class Login extends Auth
 {
-
-    public function get()
+    public function getAction()
     {
-        $check = (new auth())->check();
-        return !empty($check) ? $check : ['moduleName' => 'login'];
+        return ['moduleName' => 'login'];
     }
 
-    public function post()
+    public function postAction()
     {
         $email    = $_POST['email'];
         $password = $_POST['password'];

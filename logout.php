@@ -1,15 +1,14 @@
 <?php
+require_once('admin_auth.php');
 
-$base = require_once('base.php');
-
-class Logout extends Base
+class Logout extends AdminAuth
 {
-    public function get()
+    public function getAction()
     {
         return [];
     }
 
-    public function post()
+    public function postAction()
     {
         session_destroy();
         return 'index.php?action=login';

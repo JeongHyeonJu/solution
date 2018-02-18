@@ -1,17 +1,14 @@
 <?php
-$base      = require_once('base.php');
-$adminAuth = require_once('admin_auth.php');
+require_once('admin_auth.php');
 
-class Admin2 extends Base
+class Admin2 extends AdminAuth
 {
-
-    public function get()
+    public function getAction()
     {
-        $check = (new AdminAuth)->check();
-        return !empty($check) ? $check : [];
+        return [];
     }
 
-    public function post()
+    public function postAction()
     {
         return '';
     }

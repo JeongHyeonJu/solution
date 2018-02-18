@@ -1,14 +1,14 @@
 <?php
+require_once('base.php');
 
-class AdminAuth
+class AdminAuth extends Base
 {
-    public function check()
+    protected function invokeMethod()
     {
         if (!$_SESSION['email']) {
             return 'index.php?action=login';
         }
-        return '';
-
+        $method = strtolower($_SERVER['REQUEST_METHOD']) . 'Action';
+        return $this->{$method}();
     }
-
 }

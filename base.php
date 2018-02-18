@@ -10,7 +10,7 @@ class Base
     public static function bootstrap()
     {
         $loader = new Twig_Loader_Filesystem(self::TEMPLATES_PATH);
-        $twig = new Twig_Environment($loader, array());
+        $twig = new Twig_Environment($loader, []);
 
         $actionFile = $_GET['action'] . '.php';
         $twigFile = self::TEMPLATES_PATH . $_GET['action'] . '.twig';
@@ -22,6 +22,7 @@ class Base
 
         $module = require_once($actionFile);
         $k = new $module();
+//        $result = !empty($k->check())? $k->check() : $k->_request();
         $result = $k->_request();
 
         if (gettype($result) === 'string') {
@@ -43,7 +44,7 @@ class Base
 
     public function _request()
     {
-        return $this->{strtolower($_SERVER['REQUEST_METHOD'])}();
+        return $this->invokeMethod();
     }
 
 }
