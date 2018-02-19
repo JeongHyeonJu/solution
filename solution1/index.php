@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once './vendor/autoload.php';
+include_once '../vendor/autoload.php';
 
 //$Bootstrap = require_once 'bootstrap.php';
 //new $Bootstrap();
