@@ -2,14 +2,14 @@
     <!doctype html>
     <html>
     <head>
-        <title>login</title>
+        <title>join</title>
         <meta charset="utf-8"/>
     </head>
     <body>
-    <form method="post" action="/index.php">
+    <form method="post" action="/join.php">
         <input type="text" name="email" value=""/>
         <input type="password" name="password" value=""/>
-        <button type="submit">LOGIN</button>
+        <button type="submit">JOIN</button>
     </form>
     </body>
     </html>
@@ -36,22 +36,20 @@
 
     try {
 
-        $connection = new PDO('mysql:host=localhost:3306;dbname=solution;charset=utf8', 'solution', 'qwer1234');
-        $statement  = $connection->prepare('SELECT id, email, password FROM users WHERE email = :email');
-        $statement->execute([':email' => $email]);
-        $users = $statement->fetch(PDO::FETCH_ASSOC);
+        $connection  = new PDO('mysql:host=localhost:3306;dbname=solution;charset=utf8', 'solution', 'qwer1234');
+        $statement   = $connection->prepare('insert into users (email, password) values (:email, :password)');
+        $affectedRow = $statement->execute([
+            ':email'    => $email,
+            ':password' => password_hash($password, PASSWORD_DEFAULT)
+        ]);
 
-        if (empty($users)) {
-            echo '회원가입해주세요';
+
+        if ($affectedRow > 0) {
+            echo $email . ' 가입을 축하드립니다';
             exit();
         }
 
-        if (password_verify($password, $users['password'])) {
-            echo $email . ' 안녕하세요';
-            exit();
-        }
-
-        echo '비밀번호가 틀렸습니다';
+        echo '가입에 실패했습니다. 다시 시도해 주세요';
 
     } catch (Exception $e) {
         echo var_export($e);
