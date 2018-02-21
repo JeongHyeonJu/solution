@@ -1,4 +1,11 @@
-<?php if ($_SERVER['REQUEST_METHOD'] === 'GET') { ?>
+<?php
+session_start();
+if (!empty($_SESSION['email'])) {
+    header('Location: http://localhost:8080/index.php?action=admin1');
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') { ?>
     <!doctype html>
     <html>
     <head>
@@ -6,7 +13,7 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-    <form method="post" action="/login.php">
+    <form method="post" action="/index.php?action=login">
         <input type="text" name="email" value=""/>
         <input type="password" name="password" value=""/>
         <button type="submit">LOGIN</button>
@@ -48,6 +55,7 @@
 
         if (password_verify($password, $users['password'])) {
             echo $email . ' 안녕하세요';
+            $_SESSION['email'] = $email;
             exit();
         }
 

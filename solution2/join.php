@@ -1,4 +1,11 @@
-<?php if ($_SERVER['REQUEST_METHOD'] === 'GET') { ?>
+<?php
+session_start();
+if (!empty($_SESSION['email'])) {
+    header('Location: http://localhost:8080/index.php?action=admin1');
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') { ?>
     <!doctype html>
     <html>
     <head>
@@ -42,7 +49,6 @@
             ':email'    => $email,
             ':password' => password_hash($password, PASSWORD_DEFAULT)
         ]);
-
 
         if ($affectedRow > 0) {
             echo $email . ' 가입을 축하드립니다';
