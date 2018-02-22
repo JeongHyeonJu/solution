@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block title %}JOIN{% endblock %}
+{% block content %}
+
+    <form method="post" action="/index.php?action=join">
+        <input type="text" name="email" value=""/>
+        <input type="password" name="password" value=""/>
+        <button type="submit">JOIN</button>
+    </form>
+
+    <a href="/index.php?action=login">login</a>
+    <a href="/index.php?action=admin1">admin1</a>
+
+{% endblock %}
+
