@@ -3,11 +3,17 @@
 {% block title %}LOGIN{% endblock %}
 {% block content %}
 
+    {{ b }}
+
     <form method="post" action="/index.php?action=login">
         <input type="text" name="email" value=""/>
         <input type="password" name="password" value=""/>
         <button type="submit">LOGIN</button>
     </form>
+
+    <br/>
+    {{ message }}
+    <br/>
 
     <a href="/index.php?action=join">join</a>
     <a href="/index.php?action=admin1">admin1</a>
