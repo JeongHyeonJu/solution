@@ -1,6 +1,7 @@
 <?php
+require_once './Auth.php';
 
-class Login
+class Login extends Auth
 {
     public function get()
     {

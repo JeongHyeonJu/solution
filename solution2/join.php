@@ -1,6 +1,7 @@
 <?php
+require_once './Auth.php';
 
-class join
+class join extends Auth
 {
     public function get()
     {
