@@ -1,7 +1,8 @@
 <?php
-require_once './Auth.php';
 
-class Login extends Auth
+namespace Front;
+
+class Login extends Base
 {
     public function get()
     {
@@ -10,12 +11,12 @@ class Login extends Auth
 
     public function post()
     {
-        $email    = trim($_POST['email']);
-        $password = trim($_POST['password']);
+        $email    = \trim($_POST['email']);
+        $password = \trim($_POST['password']);
 
         if (empty($email)) {
             $_SESSION['message'] = '이메일을 입력해 주세요';
-            header('Location: http://localhost:8080/index.php?action=login');
+            header('Location: /index.php?action=login');
             exit();
         }
 
@@ -31,19 +32,19 @@ class Login extends Auth
 
         try {
 
-            $connection = new PDO('mysql:host=localhost:3306;dbname=solution;charset=utf8', 'solution', 'qwer1234');
+            $connection = new \PDO('mysql:host=localhost:3306;dbname=solution;charset=utf8', 'solution', 'qwer1234');
             $statement  = $connection->prepare('SELECT id, email, password FROM users WHERE email = :email');
             $statement->execute([':email' => $email]);
-            $users = $statement->fetch(PDO::FETCH_ASSOC);
+            $users = $statement->fetch(\PDO::FETCH_ASSOC);
 
             if (empty($users)) {
                 echo '회원가입해주세요';
                 exit();
             }
 
-            if (password_verify($password, $users['password'])) {
+            if (\password_verify($password, $users['password'])) {
                 $_SESSION['email'] = $email;
-                header('Location: http://localhost:8080/index.php?action=admin1');
+                header('Location: /index.php?action=admin1');
                 exit();
             }
 

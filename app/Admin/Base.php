@@ -1,17 +1,8 @@
 <?php
+namespace Admin;
 
-/**
- * Created by PhpStorm.
- * User: hyeon
- * Date: 2018. 2. 24.
- * Time: PM 7:00
- */
-class AdminAuth
+class Base
 {
-
-    /**
-     * AdminAuth constructor.
-     */
     public function __construct()
     {
         if (empty($_SESSION['email'])) {

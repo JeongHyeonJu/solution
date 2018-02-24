@@ -1,7 +1,8 @@
 <?php
-require_once './AdminAuth.php';
 
-class Admin1 extends AdminAuth
+namespace Admin;
+
+class Admin2 extends Base
 {
     public function get()
     {
@@ -9,3 +10,4 @@ class Admin1 extends AdminAuth
     }
 
 }
+

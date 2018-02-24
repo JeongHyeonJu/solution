@@ -1,7 +1,7 @@
 <?php
-require_once './Auth.php';
+namespace Front;
 
-class join extends Auth
+class join extends Base
 {
     public function get()
     {
