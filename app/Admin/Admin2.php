@@ -2,11 +2,11 @@
 
 namespace Admin;
 
-class Admin2
+class Admin2 extends Base
 {
-    public function __construct()
+    public function get()
     {
-        echo 'Admin2 construct';
+        return [];
     }
 }
 

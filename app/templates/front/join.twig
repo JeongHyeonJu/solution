@@ -2,5 +2,21 @@
 
 {% block title %}Join{% endblock %}
 {% block content %}
-    join
+    <form method="post" action="/index.php?action=join">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        {% if message %}
+            <div class="alert alert-warning" role="alert">
+                <strong>Warning!</strong> {{ message }}
+            </div>
+        {% endif %}
+        <input type="submit" class="btn btn-secondary" value="Join">
+    </form>
 {% endblock %}
+
