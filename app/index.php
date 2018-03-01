@@ -8,7 +8,7 @@ $action = $_REQUEST['action'];
 if (in_array($action, ['login', 'join'])) {
     $namespace = 'front';
 }
-if (in_array($action, ['admin1', 'admin2'])) {
+if (in_array($action, ['admin1', 'admin2','logout'])) {
     $namespace = 'admin';
 }
 $data         = [

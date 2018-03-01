@@ -9,7 +9,7 @@
         <a class="navbar-brand" href="#">Front Header</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                {% for nav in ['login', 'join', 'admin1', 'admin2'] %}
+                {% for nav in ['login', 'join', 'admin1', 'admin2', 'logout'] %}
                     <li class="nav-item {% if nav == action %}active{% endif %}">
                         <a class="nav-link" href="/index.php?action={{ nav }}"> {{ nav }}
                             {% if nav == action %}<span class="sr-only">(current)</span>{% endif %}</a>
