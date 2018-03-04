@@ -16,19 +16,19 @@ class Join extends Base
 
         if (empty($email)) {
             $_SESSION['message'] = '이메일을 입력해 주세요';
-            header('Location: /index.php?action=join');
+            header('Location: /join');
             exit();
         }
 
         if (empty($password)) {
             $_SESSION['message'] = '비밀번호를 입력해 주세요';
-            header('Location: /index.php?action=join');
+            header('Location: /join');
             exit();
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['message'] = '올바른 이메일을 입력해 주세요';
-            header('Location: /index.php?action=join');
+            header('Location: /join');
             exit();
         }
 
@@ -42,12 +42,12 @@ class Join extends Base
         }
 
         if ($affectedRow > 0) {
-            header('Location: /index.php?action=login');
+            header('Location: /login');
             exit();
         }
 
         $_SESSION['message'] = '가입에 실패했습니다. 다시 시도해 주세요';
-        header('Location: /index.php?action=join');
+        header('Location: /join');
 
 
     }

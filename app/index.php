@@ -2,16 +2,22 @@
 require_once '../vendor/autoload.php';
 session_start();
 
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/login', 'login');
     $r->addRoute('POST', '/login', 'login');
+    $r->addRoute('GET', '/join', 'join');
+    $r->addRoute('POST', '/join', 'join');
+    $r->addRoute('GET', '/logout', 'logout');
+    $r->addRoute('POST', '/logout', 'logout');
     $r->addRoute('GET', '/admin1', 'admin1');
     $r->addRoute('POST', '/admin1', 'admin1');
+    $r->addRoute('GET', '/admin2', 'admin2');
+    $r->addRoute('POST', '/admin2', 'admin2');
 });
 
 // Fetch method and URI from somewhere
 $httpMethod = $_SERVER['REQUEST_METHOD'];
-$uri = $_SERVER['REQUEST_URI'];
+$uri        = $_SERVER['REQUEST_URI'];
 
 // Strip query string (?foo=bar) and decode URI
 if (false !== $pos = strpos($uri, '?')) {
@@ -30,23 +36,20 @@ switch ($routeInfo[0]) {
         break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
-        $vars = $routeInfo[2];
+        $vars    = $routeInfo[2];
 
         if (in_array($handler, ['login', 'join'])) {
             $namespace = 'front';
         }
-        if (in_array($handler, ['admin1', 'admin2','logout'])) {
+        if (in_array($handler, ['admin1', 'admin2', 'logout'])) {
             $namespace = 'admin';
         }
-        $data         = [
-            'action' => $handler,
-        ];
+        $data         = ['action' => $handler,];
         $templatePath = "{$namespace}/{$handler}" . ".twig";
         $namespace    = ucfirst($namespace);
-        $handler       = ucfirst($handler);
-
-        $modelName = "\\{$namespace}\\{$handler}";
-        $model     = new $modelName();
+        $handler      = ucfirst($handler);
+        $modelName    = "\\{$namespace}\\{$handler}";
+        $model        = new $modelName();
 
         if ($httpMethod === 'GET') {
             $data            = array_merge($model->get(), $data);
