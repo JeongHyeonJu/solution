@@ -16,19 +16,19 @@ class Login extends Base
 
         if (empty($email)) {
             $_SESSION['message'] = '이메일을 입력해 주세요';
-            header('Location: /index.php?action=login');
+            header('Location: /login');
             exit();
         }
 
         if (empty($password)) {
             $_SESSION['message'] = '비밀번호를 입력해 주세요';
-            header('Location: /index.php?action=login');
+            header('Location: /login');
             exit();
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['message'] = '올바른 이메일을 입력해 주세요';
-            header('Location: /index.php?action=login');
+            header('Location: /login');
             exit();
         }
 
@@ -44,12 +44,12 @@ class Login extends Base
 
         if (password_verify($password, $user['password'])) {
             $_SESSION['email'] = $email;
-            header('Location: /index.php?action=admin1');
+            header('Location: /admin1');
             exit();
         }
 
         $_SESSION['message'] = '비밀번호가 틀렸습니다';
-        header('Location: /index.php?action=login');
+        header('Location: /login');
 
     }
 }
