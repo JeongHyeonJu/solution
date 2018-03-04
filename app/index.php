@@ -3,16 +3,16 @@ require_once '../vendor/autoload.php';
 session_start();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/login', 'login');
-    $r->addRoute('POST', '/login', 'login');
-    $r->addRoute('GET', '/join', 'join');
-    $r->addRoute('POST', '/join', 'join');
-    $r->addRoute('GET', '/logout', 'logout');
-    $r->addRoute('POST', '/logout', 'logout');
-    $r->addRoute('GET', '/admin1', 'admin1');
-    $r->addRoute('POST', '/admin1', 'admin1');
-    $r->addRoute('GET', '/admin2', 'admin2');
-    $r->addRoute('POST', '/admin2', 'admin2');
+    $r->addRoute('GET', '/login', 'front_membership_login');
+    $r->addRoute('POST', '/login', 'front_membership_login');
+    $r->addRoute('GET', '/join', 'front_membership_join');
+    $r->addRoute('POST', '/join', 'front_membership_join');
+    $r->addRoute('GET', '/logout', 'front_dashboard_logout');
+    $r->addRoute('POST', '/logout', 'front_dashboard_logout');
+    $r->addRoute('GET', '/admin1', 'front_dashboard_admin1');
+    $r->addRoute('POST', '/admin1', 'front_dashboard_admin1');
+    $r->addRoute('GET', '/admin2', 'front_dashboard_admin2');
+    $r->addRoute('POST', '/admin2', 'front_dashboard_admin2');
 });
 
 // Fetch method and URI from somewhere
@@ -38,17 +38,13 @@ switch ($routeInfo[0]) {
         $handler = $routeInfo[1];
         $vars    = $routeInfo[2];
 
-        if (in_array($handler, ['login', 'join'])) {
-            $namespace = 'front';
-        }
-        if (in_array($handler, ['admin1', 'admin2', 'logout'])) {
-            $namespace = 'admin';
-        }
-        $data         = ['action' => $handler,];
-        $templatePath = "{$namespace}/{$handler}" . ".twig";
-        $namespace    = ucfirst($namespace);
-        $handler      = ucfirst($handler);
-        $modelName    = "\\{$namespace}\\{$handler}";
+        $templatePath = preg_replace('/_/', '/', $handler);
+        $modelName    = preg_replace('/_/', '\\\\', $handler);
+
+        $action = substr($handler, strrpos($handler, '_') + 1, strlen($handler));
+
+        $data         = ['action' => $action,];
+        $templatePath = $templatePath . ".twig";
         $model        = new $modelName();
 
         if ($httpMethod === 'GET') {

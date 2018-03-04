@@ -1,12 +1,12 @@
 <?php
 
-namespace Admin;
+namespace Front\Dashboard;
 
-class Admin1 extends Base
+class Admin2 extends Base
 {
     public function get()
     {
         return [];
     }
-
 }
+

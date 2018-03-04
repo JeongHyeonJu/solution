@@ -1,6 +1,6 @@
 <?php
 
-namespace Admin;
+namespace Front\Dashboard;
 
 class Logout extends Base
 {

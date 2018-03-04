@@ -1,22 +1,21 @@
-{% extends "front/header.twig" %}
+{% extends "front/membership/header.twig" %}
 
-{% block title %}Join{% endblock %}
+{% block title %}Login{% endblock %}
 {% block content %}
-    <form method="post" action="/join">
+    <form method="post" action="/login">
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="email" name="email">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password" name="password">
         </div>
         {% if message %}
             <div class="alert alert-warning" role="alert">
                 <strong>Warning!</strong> {{ message }}
             </div>
         {% endif %}
-        <input type="submit" class="btn btn-secondary" value="Join">
+        <input type="submit" class="btn btn-secondary" value="Login">
     </form>
 {% endblock %}
-

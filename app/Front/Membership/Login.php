@@ -1,6 +1,6 @@
 <?php
 
-namespace Front;
+namespace Front\Membership;
 
 class Login extends Base
 {
