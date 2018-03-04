@@ -1,5 +1,5 @@
 <?php
-namespace Front\Dashboard;
+namespace Admin;
 
 class Dashboard extends Base
 {

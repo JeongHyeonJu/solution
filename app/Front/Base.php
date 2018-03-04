@@ -1,6 +1,6 @@
 <?php
 
-namespace Front\Membership;
+namespace Front;
 
 class Base
 {
