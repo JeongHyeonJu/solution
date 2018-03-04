@@ -39,20 +39,24 @@ switch ($routeInfo[0]) {
         $vars    = $routeInfo[2];
 
         $templatePath = preg_replace('/_/', '/', $handler);
-        $modelName    = preg_replace('/_/', '\\\\', $handler);
+        $tempModel    = substr($handler, 0, strrpos($handler, '_'));
+
+        $controller = substr($tempModel, strrpos($tempModel, '_') + 1, strlen($tempModel));
 
         $action = substr($handler, strrpos($handler, '_') + 1, strlen($handler));
 
         $data         = ['action' => $action,];
         $templatePath = $templatePath . ".twig";
-        $model        = new $modelName();
+
+        $modelName = preg_replace('/_/', '\\\\', $tempModel) . "\\{$controller}";
+        $model     = new $modelName();
 
         if ($httpMethod === 'GET') {
-            $data            = array_merge($model->get(), $data);
+            $data            = array_merge($model->{'get' . ucfirst($action)}(), $data);
             $data['message'] = $_SESSION['message'];
             unset($_SESSION['message']);
         } else {
-            $model->post();
+            $model->{'post' . ucfirst($action)}();
         }
 
         $loader = new Twig_Loader_Filesystem('./templates');
